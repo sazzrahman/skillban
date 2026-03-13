@@ -1,18 +1,19 @@
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import Navbar from "@/components/Navbar";
 
 export default function ProgressPage() {
   return (
-    <div className="mx-auto max-w-5xl p-6 lg:p-12">
-      <Link href="/app/dashboard" className="mb-6 inline-flex items-center gap-2 text-sm text-secondary hover:text-primary">
-        <ArrowLeft className="h-4 w-4" /> Back to Dashboard
-      </Link>
-      <div className="card p-8">
-        <h2 className="mb-4 text-2xl font-bold tracking-tight text-primary">Detailed Progress</h2>
-        <p className="text-secondary">
-          This page will show detailed concept breakdowns, history, and learning curves.
-        </p>
-      </div>
+    <div className="flex min-h-screen flex-col bg-background">
+      <Navbar />
+      
+      <main className="flex flex-1 items-center justify-center p-8">
+        <div className="card flex max-w-lg flex-col items-center justify-center p-12 text-center">
+          <h2 className="mb-4 text-3xl font-extrabold text-text-primary">Progress History</h2>
+          <p className="mb-8 text-lg text-text-secondary">
+            Detailed concept breakdown and history coming soon!
+          </p>
+          <div className="text-6xl">🚧</div>
+        </div>
+      </main>
     </div>
   );
 }

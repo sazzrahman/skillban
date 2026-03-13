@@ -18,9 +18,8 @@ const config: Config = {
         "text-primary": "#F1F5F9",
         "text-secondary": "#94A3B8",
         success: "#22C55E",
-        warning: "#F59E0B",
         error: "#EF4444",
-        border: "#2E2E45",
+        "border-color": "#2E2E45",
       },
       fontFamily: {
         sans: ["var(--font-inter)", "sans-serif"],

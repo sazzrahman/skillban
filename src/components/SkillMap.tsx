@@ -1,55 +1,55 @@
-import { CheckCircle2, Circle, Disc3 } from "lucide-react";
-
-type ConceptStatus = "proficient" | "in-progress" | "struggling" | "not-started";
-
-interface Concept {
-  id: string;
-  title: string;
-  status: ConceptStatus;
-}
-
-const mockConcepts: Concept[] = [
-  { id: "1", title: "Variables & Types", status: "proficient" },
-  { id: "2", title: "Functions", status: "in-progress" },
-  { id: "3", title: "Closures", status: "struggling" },
-  { id: "4", title: "Promises / Async", status: "not-started" },
-  { id: "5", title: "DOM Manipulation", status: "not-started" },
-];
-
 export default function SkillMap() {
-  const getStatusIcon = (status: ConceptStatus) => {
+  const concepts = [
+    { name: "Variables & Types", status: "proficient" },
+    { name: "Functions", status: "in_progress" },
+    { name: "Closures", status: "struggling" },
+    { name: "Promises / Async", status: "unseen" },
+    { name: "DOM Manipulation", status: "unseen" },
+  ];
+
+  const getStatusDot = (status: string) => {
     switch (status) {
       case "proficient":
-        return <CheckCircle2 className="h-5 w-5 text-success" />;
-      case "in-progress":
-        return <Disc3 className="h-5 w-5 text-primary" />;
+        return <span className="h-3 w-3 rounded-full bg-success"></span>;
+      case "in_progress":
+        return <span className="h-3 w-3 rounded-full bg-secondary"></span>;
       case "struggling":
-        return <Disc3 className="h-5 w-5 text-warning" />;
-      case "not-started":
-        return <Circle className="h-5 w-5 text-border" />;
+        return <span className="h-3 w-3 rounded-full bg-error"></span>;
+      case "unseen":
+      default:
+        return <span className="h-3 w-3 rounded-full bg-border-color"></span>;
+    }
+  };
+
+  const getStatusText = (status: string) => {
+    switch (status) {
+      case "proficient": return "Proficient";
+      case "in_progress": return "In Progress";
+      case "struggling": return "Struggling";
+      case "unseen": default: return "Not Started";
     }
   };
 
   return (
-    <div className="card p-6">
-      <h3 className="mb-4 text-lg font-semibold text-primary">JavaScript Skill Map</h3>
-      <ul className="space-y-4">
-        {mockConcepts.map((concept) => (
-          <li key={concept.id} className="flex items-center gap-3">
-            {getStatusIcon(concept.status)}
-            <span
-              className={`text-sm ${
-                concept.status === "not-started" ? "text-secondary" : "text-primary"
-              }`}
-            >
-              {concept.title}
-            </span>
-            <span className="ml-auto text-xs font-medium uppercase tracking-wider text-secondary">
-              {concept.status.replace("-", " ")}
-            </span>
-          </li>
+    <div className="card w-full max-w-md p-6">
+      <h2 className="mb-6 text-xl font-bold text-text-primary">JavaScript Skill Map</h2>
+      <div className="flex flex-col gap-4">
+        {concepts.map((concept, idx) => (
+          <div key={idx} className="flex items-center justify-between">
+            <span className="font-medium text-text-primary">{concept.name}</span>
+            <div className="flex items-center gap-2">
+              <div className="flex gap-1">
+                {getStatusDot(concept.status)}
+                {concept.status === "proficient" || concept.status === "in_progress" || concept.status === "struggling" ? getStatusDot(concept.status) : <span className="h-3 w-3 rounded-full bg-border-color/30"></span>}
+                {concept.status === "proficient" || concept.status === "in_progress" ? getStatusDot(concept.status) : <span className="h-3 w-3 rounded-full bg-border-color/30"></span>}
+              </div>
+              <span className="w-24 text-right text-xs font-semibold text-text-secondary">
+                {getStatusText(concept.status)}
+              </span>
+            </div>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }

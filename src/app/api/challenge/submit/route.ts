@@ -4,6 +4,7 @@ import { submitChallengeSchema } from "@/lib/validators";
 
 // Mock submission evaluation for MVP scaffold
 // TODO: Integrate with Piston API for actual code execution
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function evaluateCode(code: string, _testCases: unknown): Promise<{
   passed: boolean;
   testResults: Array<{
@@ -72,6 +73,7 @@ export async function POST(request: Request) {
       );
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { challengeId, code, timeTaken, hintUsed } = validationResult.data;
 
     // TODO: Fetch actual challenge from database to get test cases

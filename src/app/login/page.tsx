@@ -2,26 +2,55 @@ import Link from "next/link";
 
 export default function LoginPage() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background p-4">
-      <div className="card w-full max-w-md p-8">
-        <h2 className="mb-6 text-2xl font-bold text-center">Welcome Back</h2>
-        <form className="flex flex-col gap-4">
-          <div className="flex flex-col gap-1">
-            <label className="text-sm text-secondary" htmlFor="email">Email</label>
-            <input id="email" type="email" placeholder="falcon@example.com" className="input-field" />
+    <main className="flex min-h-screen items-center justify-center bg-background px-4 py-12 sm:px-6 lg:px-8">
+      <div className="card w-full max-w-md space-y-8 p-10">
+        <div>
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-text-primary">
+            Welcome back
+          </h2>
+          <p className="mt-2 text-center text-sm text-text-secondary">
+            Or{" "}
+            <Link href="/register" className="font-medium text-primary hover:text-primary-hover">
+              create a new account
+            </Link>
+          </p>
+        </div>
+        
+        <form className="mt-8 space-y-6" action="#" method="POST">
+          <div className="space-y-4 rounded-md shadow-sm">
+            <div>
+              <label htmlFor="email-address" className="sr-only">Email address</label>
+              <input
+                id="email-address"
+                name="email"
+                type="email"
+                autoComplete="email"
+                required
+                className="input-field"
+                placeholder="Email address"
+              />
+            </div>
+            <div>
+              <label htmlFor="password" className="sr-only">Password</label>
+              <input
+                id="password"
+                name="password"
+                type="password"
+                autoComplete="current-password"
+                required
+                className="input-field"
+                placeholder="Password"
+              />
+            </div>
           </div>
-          <div className="flex flex-col gap-1">
-            <label className="text-sm text-secondary" htmlFor="password">Password</label>
-            <input id="password" type="password" placeholder="••••••••" className="input-field" />
+
+          <div>
+            <Link href="/app/dashboard" className="btn-primary flex w-full justify-center text-center py-3 text-lg">
+              Sign in
+            </Link>
           </div>
-          <Link href="/app/dashboard" className="btn-primary text-center mt-4">
-            Log in
-          </Link>
         </form>
-        <p className="mt-4 text-center text-sm text-secondary">
-          Don't have an account? <Link href="/register" className="text-primary hover:underline">Register</Link>
-        </p>
       </div>
-    </div>
+    </main>
   );
 }

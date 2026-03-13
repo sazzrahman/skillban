@@ -1,9 +1,7 @@
-import { Flame } from "lucide-react";
-
-export default function StreakBadge({ count }: { count: number }) {
+export default function StreakBadge({ count = 7 }: { count?: number }) {
   return (
-    <div className="flex items-center gap-1.5 rounded-full bg-surface-raised px-3 py-1 font-semibold text-secondary shadow-sm">
-      <Flame className="h-4 w-4 text-warning" />
+    <div className="flex items-center gap-2 rounded-full border border-border-color bg-surface-raised px-3 py-1 text-sm font-semibold text-secondary shadow-sm">
+      <span className="text-lg leading-none">🔥</span>
       <span>{count}</span>
     </div>
   );

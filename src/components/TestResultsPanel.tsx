@@ -1,71 +1,37 @@
-import { CheckCircle2, XCircle, Clock } from "lucide-react";
+export default function TestResultsPanel() {
+  const mockTests = [
+    { id: 1, name: "Test 1: Creates a counter that starts at 0", passed: true, error: "" },
+    { id: 2, name: "Test 2: Increments the counter correctly", passed: true, error: "" },
+    { id: 3, name: "Test 3: Maintains state independently for multiple instances", passed: false, error: "Expected 3, got undefined" },
+  ];
 
-interface TestCase {
-  id: number;
-  description: string;
-  status: "passed" | "failed" | "pending";
-  error?: string;
-}
-
-interface TestResultsPanelProps {
-  results: TestCase[];
-  onRun: () => void;
-  isRunning: boolean;
-}
-
-export default function TestResultsPanel({ results, onRun, isRunning }: TestResultsPanelProps) {
   return (
-    <div className="flex h-full flex-col bg-surface p-4">
-      <div className="mb-4 flex items-center justify-between">
-        <h3 className="font-semibold text-primary">Test Results</h3>
-        <button
-          onClick={onRun}
-          disabled={isRunning}
-          className="btn-primary py-1.5 px-3 text-sm"
-        >
-          {isRunning ? "Running..." : "Run Code"}
-        </button>
-      </div>
-
-      <div className="flex-1 overflow-auto rounded border border-border bg-background p-4">
-        {results.length === 0 ? (
-          <div className="flex h-full items-center justify-center text-sm text-secondary">
-            Run your code to see results
+    <div className="flex h-full flex-col bg-surface p-6">
+      <h3 className="mb-4 text-lg font-bold text-text-primary">Output / Test Results</h3>
+      
+      <div className="mb-6 flex-1 overflow-y-auto space-y-3">
+        {mockTests.map((test) => (
+          <div key={test.id} className="rounded-md border border-border-color bg-background p-3">
+            <div className="flex items-center gap-2">
+              <span className="text-lg leading-none">
+                {test.passed ? "✅" : "❌"}
+              </span>
+              <span className={`font-semibold ${test.passed ? "text-success" : "text-error"}`}>
+                {test.name}
+              </span>
+            </div>
+            {!test.passed && test.error && (
+              <div className="mt-2 text-sm text-text-secondary pl-8">
+                <code className="bg-surface-raised px-1 py-0.5 rounded text-error">{test.error}</code>
+              </div>
+            )}
           </div>
-        ) : (
-          <ul className="space-y-3">
-            {results.map((test) => (
-              <li key={test.id} className="flex flex-col gap-1">
-                <div className="flex items-center gap-2 text-sm">
-                  {test.status === "passed" && <CheckCircle2 className="h-4 w-4 text-success" />}
-                  {test.status === "failed" && <XCircle className="h-4 w-4 text-error" />}
-                  {test.status === "pending" && <Clock className="h-4 w-4 text-secondary" />}
-                  <span
-                    className={
-                      test.status === "passed"
-                        ? "text-success"
-                        : test.status === "failed"
-                        ? "text-error"
-                        : "text-secondary"
-                    }
-                  >
-                    Test {test.id}: {test.description}
-                  </span>
-                </div>
-                {test.error && (
-                  <div className="ml-6 mt-1 rounded bg-surface-raised p-2 text-xs text-error font-mono">
-                    {test.error}
-                  </div>
-                )}
-              </li>
-            ))}
-          </ul>
-        )}
+        ))}
       </div>
 
-      <div className="mt-4 flex gap-3">
-        <button className="btn-secondary flex-1 py-1.5 text-sm">Hint</button>
-        <button className="btn-secondary flex-1 py-1.5 text-sm">Skip</button>
+      <div className="flex gap-4 border-t border-border-color pt-4">
+        <button className="btn-secondary w-full">Hint</button>
+        <button className="btn-secondary w-full">Skip</button>
       </div>
     </div>
   );
